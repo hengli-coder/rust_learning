@@ -1,42 +1,24 @@
-use std::{fmt::{Display,Formatter,Result}, slice::{self, SliceIndex}};
-struct Matrix(f32,f32,f32,f32);
+use async_std::task::{sleep, spawn};
+use std::time::Duration;
 
-impl Display for Matrix {
-    fn fmt(&self, f: &mut Formatter) -> Result {
-        println!("go to this step");
-        write!(f,"({} {})\n({} {})", self.0,self.1,self.2,self.3)
+async fn sleepus() {
+    for i in 1..=10 {
+        println!("Sleepus {}", i);
+        sleep(Duration::from_millis(500)).await;
     }
 }
 
-fn reverse(pair:(i32,bool))->(bool,i32) {
-    println!("this step");
-    println!("{},{}",pair.0,pair.1);
-    return (pair.1, pair.0);
-}
-
-fn visit(v:&mut [i32]) {
-    let opt = v.get(4);
-    match opt {
-        Some(opt)=>print!("{}",&opt),
-        None=>println!("no data"),
+async fn interruptus() {
+    for i in 1..=5 {
+        println!("Interruptus {}", i);
+        sleep(Duration::from_millis(1000)).await;
     }
-   // print!("{:?}",v[4]);
 }
 
-fn owner() {
-    let v = 10;
-    
-    let b = v;
+#[async_std::main]
+async fn main() {
+    let sleepus = spawn(sleepus());
+    interruptus().await;
 
-    println!("{},{}",v,b);
-}
-
-fn main() {
-    let (data,ok) = reverse((10,false));
-    println!("{},{}",&data,&ok);
-    let m = Matrix(1.0,2.0,3.0,4.0);
-    println!("{}",m);
-    let mut v = vec![1,2,3];
-    visit(v.as_mut_slice());
-    owner();
+    sleepus.await;
 }
