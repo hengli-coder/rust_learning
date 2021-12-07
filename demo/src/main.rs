@@ -1,14 +1,8 @@
-fn main() {
-   let a = 100;
-    {
-        let x = a;
-    }
-
-    let v: isize = 10;
-
-    println!("{}",x)
+struct A {
+    name: String,
+    age: i32,
 }
 
-fn owner(i: &str) {
-    println!("{}",i);
+fn main() {
+    let a = vec![0,1,2];
 }
