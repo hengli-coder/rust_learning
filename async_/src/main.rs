@@ -19,7 +19,8 @@ async fn interrupts() {
 #[async_std::main]
 async fn main() {
     let sleeps = spawn(sleeps());
-    interrupts().await;
+    let interrupts = spawn(interrupts());
 
+    interrupts.await;
     sleeps.await;
 }
