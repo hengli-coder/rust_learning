@@ -18,8 +18,8 @@ async fn interrupts() {
 
 #[async_std::main]
 async fn main() {
-    let sleeps = spawn(sleeps());
-    let interrupts = spawn(interrupts());
+    let sleeps = spawn(sleeps());           //创建任务
+    let interrupts = spawn(interrupts());   //创建任务
 
     interrupts.await;
     sleeps.await;
