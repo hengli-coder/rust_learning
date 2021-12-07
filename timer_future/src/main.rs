@@ -9,7 +9,7 @@ use {
         future::Future,
         sync::mpsc::{sync_channel, Receiver, SyncSender},
         sync::{Arc, Mutex},
-        task::{Context, Poll},
+        task::{Context},
         time::Duration,
     },
 
@@ -84,7 +84,7 @@ fn main() {
 
     spawner.spawn(async {
         println!("hello");
-        TimerFuture::new(Duration::new(10,0)).await;
+        TimerFuture::new(Duration::new(5,0)).await;
         println!("world!");
     });
 
