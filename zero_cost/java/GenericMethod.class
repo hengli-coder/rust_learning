@@ -1,0 +1,35 @@
+class GenericMethod {
+  GenericMethod();
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+
+  public static <E> void printParam(E);
+       0: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;
+       3: aload_0
+       4: invokevirtual #3                  // Method java/io/PrintStream.println:(Ljava/lang/Object;)V
+       7: return
+
+
+  public static void main(java.lang.String[]);
+       0: iconst_1
+       1: invokestatic  #4                  // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
+       4: astore_1
+       5: ldc2_w        #5                  // double 1.1d
+       8: invokestatic  #7                  // Method java/lang/Double.valueOf:(D)Ljava/lang/Double;
+      11: astore_2
+      12: bipush        97
+      14: invokestatic  #8                  // Method java/lang/Character.valueOf:(C)Ljava/lang/Character;
+      17: astore_3
+      18: bipush        10
+      20: istore        4
+      22: aload_1
+      23: invokestatic  #9                  // Method printParam:(Ljava/lang/Object;)V
+      26: aload_2
+      27: invokestatic  #9                  // Method printParam:(Ljava/lang/Object;)V
+      30: aload_3
+      31: invokestatic  #9                  // Method printParam:(Ljava/lang/Object;)V
+      34: return
+
+}
