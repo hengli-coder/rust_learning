@@ -1,8 +1,12 @@
-struct A {
-    name: String,
-    age: i32,
+use std::fmt::Display;
+
+pub fn main() {
+    let int_param = 0;
+    let float_param = 1.2;
+    visit(int_param);
+    visit(float_param);
 }
 
-fn main() {
-    let a = vec![0,1,2];
+fn visit<T:Display>(a:T) {
+    println!("{}",a);
 }
