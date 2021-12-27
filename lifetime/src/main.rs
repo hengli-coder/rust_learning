@@ -1,21 +1,26 @@
 fn main() {
-    let a = String::from("hello");
-    let b = String::from("world");
-    println!("{}", lifetime(&a, &b));
+    let x = 1; // -------------+-- x start
+    let max; // -------------+-- max start
+    {
+        //              |
+        let y = 8; // -------------+-- y start
+        max = max_num(&x, &y); //              |
+    } // -------------+-- y over
+    println!("max: {}", max); //              |
+} // -------------+-- max, x over
+
+fn max_num(x: &i32, y: &i32) -> &i32 {
+    if x > y {
+        &x
+    } else {
+        &y
+    }
 }
 
-fn lifetime(a: &str, b: &str) -> &str { // expected named lifetime parameter
-    if a.len() > b.len() {    //  'a +
-        a                    //  'a +
-    } else {                //   'a -    //'b +
-        b                               // 'b +
-    }                                   // 'b -
-}
-
-fn lifetime_<'a>(a: &'a str, b: &'a str) -> &'a str {
-    if a.len() > b.len() {  //  'a +
-        a                   //  'a +
-    } else {                //  'a +
-        b                   //  'a +
-    }                       //  'a +
+fn max_num_lifetime<'a>(x: &'a i32, y: &'a i32) -> &'a i32 {
+    if x>y {
+        x
+    } else {
+        y
+    }
 }
